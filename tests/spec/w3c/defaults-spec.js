@@ -19,7 +19,19 @@ describe("W3C — Defaults", () => {
     expect(rsConf.specStatus).toEqual("base");
   });
 
-  it("allows w3c defaults to be overriden", async () => {
+  it("casts processVersion to a string", async () => {
+    const ops = {
+      config: {
+        processVersion: 1234,
+      },
+      body: makeDefaultBody(),
+    };
+    const doc = await makeRSDoc(ops);
+    const { processVersion } = doc.defaultView.respecConfig;
+    expect(processVersion).toEqual("1234");
+  });
+
+  it("allows w3c defaults to be overridden", async () => {
     const ops = {
       config: {
         editors: [{ name: "foo" }],
@@ -39,7 +51,7 @@ describe("W3C — Defaults", () => {
     };
     const doc = await makeRSDoc(ops);
     const rsConf = doc.defaultView.respecConfig;
-    expect(rsConf.processVersion).toEqual(2020);
+    expect(rsConf.processVersion).toEqual("2020");
     expect(rsConf.lint).toEqual({
       "no-headingless-sections": false,
       "privsec-section": false,
