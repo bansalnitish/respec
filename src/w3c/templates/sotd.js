@@ -175,5 +175,5 @@ ${conf.isUnofficial ? html`
     `}
   `}
 `}
-${[conf.additionalSections]}`
+${[conf.additionalSections]}`;
 }
